@@ -1,11 +1,9 @@
 import os
 from openai import OpenAI
-from dotenv import load_dotenv
 
-load_dotenv()
 
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
+    api_key=os.environ.get("API_KEY"),
     base_url="https://api.gilas.io/v1/"
 )
 
@@ -26,3 +24,7 @@ def generate_text(prompt: str) -> dict:
     
     except Exception as e:
         return {"success": False, "error": str(e)}
+
+if __name__ == "__main__":
+    test_prompt = "Explain the theory of relativity in simple terms."
+    print(generate_text(test_prompt))
